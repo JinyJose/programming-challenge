@@ -1,5 +1,7 @@
 package de.exxcellent.challenge.bo;
 
+import org.json.JSONObject;
+
 /**
  * Definition of Weather Data
  * @author j.jose
@@ -58,7 +60,29 @@ public class WeatherBO extends BaseBO {
         this.r_avSlp = Double.parseDouble(weatherData[13]);        
         this.absoluteDifference = computeDifference(this.getMxT(), this.getMnT());
     }
-
+    
+    /**
+     * Contructor for JSONObject Input
+     * @param weatherDataJsonString
+     */
+    public WeatherBO(JSONObject weatherDataJsonString) {        
+        this.day = weatherDataJsonString.getInt("Day");
+        this.mxT = weatherDataJsonString.getInt("MxT");
+        this.mnT = weatherDataJsonString.getInt("MnT");
+        this.avT = weatherDataJsonString.getInt("AvT");
+        this.avDP = weatherDataJsonString.getInt("AvDP");
+        this.oneHrP_tpCpn = weatherDataJsonString.getInt("1HrP TPcpn");
+        this.pDir = weatherDataJsonString.getInt("PDir");
+        this.avSp = weatherDataJsonString.getInt("AvSp");        
+        this.dir = weatherDataJsonString.getInt("Dir");
+        this.mxS = weatherDataJsonString.getInt("MxS");
+        this.skyC = weatherDataJsonString.getInt("SkyC");
+        this.mxR = weatherDataJsonString.getInt("MxR");
+        this.mn = weatherDataJsonString.getInt("Mn");
+        this.r_avSlp = weatherDataJsonString.getInt("R AvSLP");        
+        this.absoluteDifference = computeDifference(this.getMxT(), this.getMnT());
+    }
+    
     /**
      * Get the value of r_avSlp
      *

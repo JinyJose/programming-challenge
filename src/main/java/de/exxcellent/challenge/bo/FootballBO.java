@@ -1,5 +1,7 @@
 package de.exxcellent.challenge.bo;
 
+import org.json.JSONObject;
+
 /**
  * Definition of Football Data
  * @author j.jose
@@ -40,7 +42,22 @@ public class FootballBO extends BaseBO {
         this.points = Integer.parseInt(footballTeamData[7]);
         this.absoluteDifference = computeDifference(this.getGoals(), this.getGoalsAllowed());
     }
-
+    /**
+     * Contructor for JSONObject Input
+     * @param footballTeamDataJsonStr
+     */
+    public FootballBO(JSONObject footballTeamDataJsonStr) {
+        this.team = footballTeamDataJsonStr.getString("Team");
+        this.games = footballTeamDataJsonStr.getInt("Games");
+        this.wins = footballTeamDataJsonStr.getInt("Wins");
+        this.losses = footballTeamDataJsonStr.getInt("Losses");
+        this.draws = footballTeamDataJsonStr.getInt("Draws");
+        this.goals = footballTeamDataJsonStr.getInt("Goals");
+        this.goalsAllowed = footballTeamDataJsonStr.getInt("Goals Allowed");
+        this.points = footballTeamDataJsonStr.getInt("Points");
+        this.absoluteDifference = computeDifference(this.getGoals(), this.getGoalsAllowed());
+    }
+    
     /**
      * Get the value of points
      *

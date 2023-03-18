@@ -5,5 +5,5 @@ package de.exxcellent.challenge.utils;
  * @author j.jose
  */
 public enum FileType {
-    CSV;
+    CSV , JSON;
 }

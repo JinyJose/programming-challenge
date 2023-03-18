@@ -4,6 +4,7 @@ import de.exxcellent.challenge.controllers.ApplicationController;
 import static de.exxcellent.challenge.utils.ChallengeType.FOOTBALL;
 import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
 import static de.exxcellent.challenge.utils.FileType.CSV;
+import static de.exxcellent.challenge.utils.FileType.JSON;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -38,15 +39,21 @@ public final class App {
                 if (CSV.toString().equalsIgnoreCase(fileType)) {
                     processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.csv", WEATHER, CSV);
                     System.out.println(processedDataOutput);                    
+                } else if (JSON.toString().equalsIgnoreCase(fileType)) {
+                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.json", WEATHER, JSON);
+                    System.out.println(processedDataOutput);
                 } else {
-                    System.out.println("Invalid file type --- FileType : " + fileType );
+                System.out.println("Invalid file type --- FileType : " + fileType );
                 }
-            } else if (FOOTBALL.toString().equalsIgnoreCase(challengeType)) {
+            } if (FOOTBALL.toString().equalsIgnoreCase(challengeType)) {
                 if (CSV.toString().equalsIgnoreCase(fileType)) {
-                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.csv", WEATHER, CSV);
+                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/football.csv", FOOTBALL, CSV);
                     System.out.println(processedDataOutput);                    
+                } else if (JSON.toString().equalsIgnoreCase(fileType)) {
+                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/football.json", FOOTBALL, JSON);
+                    System.out.println(processedDataOutput);
                 } else {
-                    System.out.println("Invalid file type --- FileType : " + fileType );
+                System.out.println("Invalid file type --- FileType : " + fileType );
                 }
             } else {
                 System.out.println("Invalid challenge type --- Challenge : " + challengeType );
