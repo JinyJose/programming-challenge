@@ -24,13 +24,21 @@ class AppTest {
     }
 
     @Test
-    void runFootball() {
+    void runFootballCSV() {
         App.main("football", "csv");
     }
     
     @Test
-    void runWeather() {
+    void runWeatherCSV() {
         App.main("weather", "CSV");
     }
-
+  @Test
+    void runFootballJSON() {
+        App.main("football", "json");
+    }
+    
+    @Test
+    void runWeatherJSON() {
+        App.main("weather", "json");
+    }
 }
