@@ -4,6 +4,7 @@ import de.exxcellent.challenge.controllers.ApplicationController;
 import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
 import static de.exxcellent.challenge.utils.FileType.CSV;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point
@@ -22,11 +23,15 @@ public final class App {
     public static void main(String... args) {
         String processedDataOutput = "UNKNOWN";
         ApplicationController applicationController = new ApplicationController();
+        String challengeType = WEATHER.toString();        
+        String fileType = CSV.toString();   
         // For unit tests
-        String challengeType = args[0];        
-        String fileType = args[1];        
-        System.out.println("!! Start Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ----- !!");
+        if (args != null && args.length != 0) {
+            challengeType = Optional.ofNullable(args[0]).orElse(challengeType); //args[0];        
+            fileType = Optional.ofNullable(args[1]).orElse(fileType); //args[1];        
+        }
         
+        System.out.println("!! Start Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ----- !!");        
         try {
             if (WEATHER.toString().equalsIgnoreCase(challengeType)) {
                 if (CSV.toString().equalsIgnoreCase(fileType)) {
@@ -37,12 +42,11 @@ public final class App {
                 }
             } else {
                 System.out.println("Invalid challenge type --- Challenge : " + challengeType );
-            }
-            System.out.println("!! End Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ------ !!");
-            
+            }            
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("!! End Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ------ !!");
         
     }
 }
