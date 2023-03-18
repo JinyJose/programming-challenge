@@ -1,6 +1,7 @@
 package de.exxcellent.challenge.controllers;
 
 import de.exxcellent.challenge.bo.BaseBO;
+import de.exxcellent.challenge.processors.FootballDataProcessor;
 import de.exxcellent.challenge.processors.WeatherDataProcessor;
 import de.exxcellent.challenge.readers.CSVReader;
 import de.exxcellent.challenge.utils.ChallengeType;
@@ -39,7 +40,13 @@ public class ApplicationController {
      */
     public String processCSVFile(String fileData, ChallengeType challengeType) throws FileNotFoundException, IOException {        
         List<BaseBO> processedObjectList = new CSVReader().read(fileData, challengeType);
-        return new WeatherDataProcessor().processWeatherData(processedObjectList);
+        switch (challengeType) {
+            case FOOTBALL:
+                return new FootballDataProcessor().processFootballData(processedObjectList);
+            case WEATHER:
+                return new WeatherDataProcessor().processWeatherData(processedObjectList);
+        }
+        return null;
     }
 
 }

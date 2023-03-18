@@ -1,6 +1,7 @@
 package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.controllers.ApplicationController;
+import static de.exxcellent.challenge.utils.ChallengeType.FOOTBALL;
 import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
 import static de.exxcellent.challenge.utils.FileType.CSV;
 import java.io.IOException;
@@ -38,7 +39,14 @@ public final class App {
                     processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.csv", WEATHER, CSV);
                     System.out.println(processedDataOutput);                    
                 } else {
-                System.out.println("Invalid file type --- FileType : " + fileType );
+                    System.out.println("Invalid file type --- FileType : " + fileType );
+                }
+            } else if (FOOTBALL.toString().equalsIgnoreCase(challengeType)) {
+                if (CSV.toString().equalsIgnoreCase(fileType)) {
+                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.csv", WEATHER, CSV);
+                    System.out.println(processedDataOutput);                    
+                } else {
+                    System.out.println("Invalid file type --- FileType : " + fileType );
                 }
             } else {
                 System.out.println("Invalid challenge type --- Challenge : " + challengeType );

@@ -1,6 +1,7 @@
 package de.exxcellent.challenge.readers;
 
 import de.exxcellent.challenge.bo.BaseBO;
+import de.exxcellent.challenge.bo.FootballBO;
 import de.exxcellent.challenge.bo.WeatherBO;
 import de.exxcellent.challenge.utils.ChallengeType;
 import java.util.LinkedList;
@@ -18,8 +19,16 @@ public class CSVReader implements Reader {
         List<BaseBO> bo = new LinkedList<>();
         String[] csv = csvData.split(System.lineSeparator());
         for (int i = 1; i < csv.length; i++) {
-            WeatherBO weatherBO = new WeatherBO(csv[i]);
-            bo.add(weatherBO);
+            switch (challengeType) {
+                case FOOTBALL:
+                    FootballBO footballBO = new FootballBO(csv[i]);
+                    bo.add(footballBO);
+                    break;
+                case WEATHER:
+                    WeatherBO weatherBO = new WeatherBO(csv[i]);
+                    bo.add(weatherBO);
+                    break;
+            }
         }
         return bo;
     }
