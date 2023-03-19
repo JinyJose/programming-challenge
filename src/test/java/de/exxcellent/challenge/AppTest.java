@@ -32,6 +32,7 @@ class AppTest {
     void runWeatherCSV() {
         App.main("weather", "CSV");
     }
+  
   @Test
     void runFootballJSON() {
         App.main("football", "json");
@@ -40,5 +41,21 @@ class AppTest {
     @Test
     void runWeatherJSON() {
         App.main("weather", "json");
+    }
+    
+    @Test
+    void runFootball_invalid() {
+        App.main("football", "xyz");    
+    }
+    
+    @Test
+    void runWeather_invalid() {
+        App.main("weather", "xyz"); 
+    }
+    
+    @Test
+    void runChallenge_invalid() {
+        App.main("months", "csv");    
+        App.main("weeks", "json");    
     }
 }
