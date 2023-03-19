@@ -1,8 +1,10 @@
 package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.controllers.ApplicationController;
+import de.exxcellent.challenge.utils.ChallengeType;
 import static de.exxcellent.challenge.utils.ChallengeType.FOOTBALL;
 import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
+import de.exxcellent.challenge.utils.FileType;
 import static de.exxcellent.challenge.utils.FileType.CSV;
 import static de.exxcellent.challenge.utils.FileType.JSON;
 import java.io.IOException;
@@ -23,45 +25,42 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) {
-        String processedDataOutput = "UNKNOWN";
-        ApplicationController applicationController = new ApplicationController();
-        String challengeType = WEATHER.toString();        
-        String fileType = CSV.toString();   
+        String challengeType = WEATHER.toString();
+        String fileType = CSV.toString();
         // For unit tests
         if (args != null && args.length != 0) {
             challengeType = Optional.ofNullable(args[0]).orElse(challengeType); //args[0];        
             fileType = Optional.ofNullable(args[1]).orElse(fileType); //args[1];        
         }
-        
-        System.out.println("!! Start Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ----- !!");        
+
+        System.out.println("!! Start Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ----- !!");
         try {
             if (WEATHER.toString().equalsIgnoreCase(challengeType)) {
-                if (CSV.toString().equalsIgnoreCase(fileType)) {
-                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.csv", WEATHER, CSV);
-                    System.out.println(processedDataOutput);                    
-                } else if (JSON.toString().equalsIgnoreCase(fileType)) {
-                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/weather.json", WEATHER, JSON);
-                    System.out.println(processedDataOutput);
-                } else {
-                System.out.println("Invalid file type --- FileType : " + fileType );
-                }
-            } if (FOOTBALL.toString().equalsIgnoreCase(challengeType)) {
-                if (CSV.toString().equalsIgnoreCase(fileType)) {
-                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/football.csv", FOOTBALL, CSV);
-                    System.out.println(processedDataOutput);                    
-                } else if (JSON.toString().equalsIgnoreCase(fileType)) {
-                    processedDataOutput = applicationController.processFile("de/exxcellent/challenge/football.json", FOOTBALL, JSON);
-                    System.out.println(processedDataOutput);
-                } else {
-                System.out.println("Invalid file type --- FileType : " + fileType );
-                }
+                System.out.println(anlayseData(WEATHER , fileType));
+            } else if (FOOTBALL.toString().equalsIgnoreCase(challengeType)) {
+                System.out.println(anlayseData(FOOTBALL , fileType));                
             } else {
-                System.out.println("Invalid challenge type --- Challenge : " + challengeType );
-            }            
+                System.out.println("Invalid challenge type --- Challenge : " + challengeType);
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("!! End Processing --- FileType : " + fileType + " , Challenge : " + challengeType + " ------ !!");
-        
+        System.out.println("");
+
+    }
+
+    public static String anlayseData(ChallengeType challengeType, String fileType) throws IOException {
+
+        String processedDataOutput = "Invalid file type --- FileType : " + fileType;
+        ApplicationController applicationController = new ApplicationController();
+        if (CSV.toString().equalsIgnoreCase(fileType)) {
+            String filePath = challengeType.toString().equalsIgnoreCase("WEATHER") ? "de/exxcellent/challenge/weather.csv" : "de/exxcellent/challenge/football.csv";
+            processedDataOutput = applicationController.processFile(filePath, challengeType, CSV);
+        } else if (JSON.toString().equalsIgnoreCase(fileType)) {
+            String filePath = challengeType.toString().equalsIgnoreCase("WEATHER") ? "de/exxcellent/challenge/weather.json" : "de/exxcellent/challenge/football.json";
+            processedDataOutput = applicationController.processFile(filePath, challengeType, JSON);
+        } 
+        return processedDataOutput;
     }
 }
