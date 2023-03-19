@@ -1,5 +1,10 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.utils.ChallengeType;
+import static de.exxcellent.challenge.utils.ChallengeType.FOOTBALL;
+import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
+import static de.exxcellent.challenge.utils.FileType.CSV;
+import static de.exxcellent.challenge.utils.FileType.JSON;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,4 +63,31 @@ class AppTest {
         App.main("months", "csv");    
         App.main("weeks", "json");    
     }
+    
+    /**
+     * Test of anlayseData method, of class App with weather data
+     */
+    @Test
+    public void testAnlayseData_weather() throws Exception {
+        System.out.println("anlayseData");
+        ChallengeType challengeType = WEATHER;
+        String fileType = CSV.toString();
+        String expResult = "Day with the smallest temperature spread (difference between maximum & minimum temperature of the day) : 14";
+        String result = App.anlayseData(challengeType, fileType);
+        assertEquals(expResult, result);
+    }
+    
+        /**
+     * Test of anlayseData method, of class App with weather data
+     */
+    @Test
+    public void testAnlayseData_football() throws Exception {
+        System.out.println("anlayseData");
+        ChallengeType challengeType = FOOTBALL;
+        String fileType = JSON.toString();
+        String expResult = "Team with the smallest distance (absolute difference) between \"Goals\" and \"Goals Allowed\" : Aston_Villa";
+        String result = App.anlayseData(challengeType, fileType);
+        assertEquals(expResult, result);
+    }
+    
 }

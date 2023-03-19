@@ -4,7 +4,6 @@ import de.exxcellent.challenge.controllers.ApplicationController;
 import de.exxcellent.challenge.utils.ChallengeType;
 import static de.exxcellent.challenge.utils.ChallengeType.FOOTBALL;
 import static de.exxcellent.challenge.utils.ChallengeType.WEATHER;
-import de.exxcellent.challenge.utils.FileType;
 import static de.exxcellent.challenge.utils.FileType.CSV;
 import static de.exxcellent.challenge.utils.FileType.JSON;
 import java.io.IOException;
